@@ -20,9 +20,20 @@ class TrainSeeder extends Seeder
             $train->company = $faker->company();
             $train->departure_station = $faker->city();
             $train->arrival_station = $faker->city();
-            $train->departure_time = $faker->time();
-            $train->arrival_time = $faker->time();
-            $train->train_code = $faker->numberBetween(1, 100);
+            $train->departure_time =  $faker->dateTimeThisCentury->format('Y-m-d H:i:s');
+            $train->arrival_time =  $faker->dateTimeThisCentury->format('Y-m-d H:i:s');
+
+
+            // NUMERI UNICI PE RIL TRAIN CODE
+            $unique = false;
+            do {
+                $train_code = $faker->numberBetween(1, 1000);
+                $existing_train = Train::where('train_code', $train_code)->first();
+                $unique = ($existing_train == null);
+            } while (!$unique);
+
+            $train->train_code = $train_code;
+
             $train->number_of_carriages = $faker->numberBetween(1, 10);
             $train->on_time = $faker->boolean();
             $train->is_cancelled = $faker->boolean();
@@ -30,24 +41,5 @@ class TrainSeeder extends Seeder
 
             $train->save();
         }
-
-
-
-        $new_train = new Train();
-
-
-        $new_train->company = 'CICCIO';
-        $new_train->departure_station = 'CICCIO';
-        $new_train->arrival_station = 'ciccio';
-        $new_train->departure_time = '2023-02-27 10:45:00';
-        $new_train->arrival_time = '2023-02-27 10:45:00';
-        $new_train->train_code = '54';
-        $new_train->number_of_carriages = 5;
-        $new_train->on_time = true;
-        $new_train->is_cancelled = false;
-
-
-        // salvo su db
-        $new_train->save();
     }
 }

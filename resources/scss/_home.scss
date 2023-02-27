@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid black;
+    }
+
+    th {
+        background-color: #ccc;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:hover {
+        background-color: #ddd;
+    }
+
+    .cancelled {
+        background-color: #ff9999;
+    }
+
+    .delayed {
+        background-color: #ffff99;
+    }
+}
