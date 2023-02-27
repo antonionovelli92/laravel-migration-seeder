@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('departure_station', 100);
             $table->string('arrival_station', 100);
             $table->dateTime('departure_time');
-            $table->dateTime('arrival_time')->unsigned();
-            $table->string('train_code')->unique();
+            $table->dateTime('arrival_time');
+            $table->string('train_code', 100);
             $table->integer('number_of_carriages');
-            $table->boolean('on_time')->unsigned()->default(1);
-            $table->boolean('is_cancelled')->unsigned()->default(0);
+            $table->boolean('on_time')->default(1);
+            $table->boolean('is_cancelled')->default(0);
             $table->timestamps();
         });
     }
